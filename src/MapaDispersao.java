@@ -202,9 +202,31 @@ public int mapear(char caracter) {
     return caracter - 'a';  
 }
 
+//bubllersort  
+public void ordenarBolhaCrescente(T [] info){
+    int i,j;
+    int n = info.length;
+    boolean trocar; 
 
+    for(i = n-1 ;i <= 1; i++){
+        trocar = false;
+       for(j = 0; j <= i; j++){
+          if(((Comparable<T>)info[j]).compareTo(info[j+1]) > 0){
+            trocar(info, j, j+1);
+            trocar = true; 
+          }
+       }
+       if(!trocar) break; 
 
+    }
+}
 
+public void trocar(T [] info, int atual, int sucessor){
+   T temp =  info[atual]; 
+   info[atual] = info[sucessor];
+   info[sucessor] = temp;
+
+}
 
 @Override
 public String toString() {

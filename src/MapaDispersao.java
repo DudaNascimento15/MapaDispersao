@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class MapaDispersao<T> {
+public class MapaDispersao<T extends Comparable<T>>{
   private ListaEncadeada<NoMapa<T>> [] info ; 
 
   public MapaDispersao(int tamanho){
@@ -253,6 +253,83 @@ public int comparacoes(T [] info){
    return 0; 
 }
 
+public void ordernaQuickSort(){
+    int n = info.length-1;
+    quicksort(0,n);
+}
+
+
+public void quicksort(int inicio, int fim){
+    if(inicio < fim){
+        int idxPivo = particionar(inicio,fim);
+        quicksort(inicio, idxPivo-1);
+        quicksort(idxPivo+1, fim);
+    }
+}
+
+
+public int particionar(int inicio, int fim){
+    int a = inicio; 
+    int b = fim; 
+
+    T pivo = (T) info[inicio]; 
+    
+    while(true){
+        
+    do{
+     a = a +1; 
+    }while( a <= fim  && ((Comparable<T>)info[a]).compareTo(pivo) < 0);
+      
+    do{
+       b = b -1;         
+    } while(b >= inicio && ((Comparable<T>)info[b]).compareTo(pivo) > 0); 
+    
+    if(a >= b)
+      break;
+    
+    trocar(a, b);
+}
+    
+    trocar(b, inicio);
+    return b;
+}
+
+
+public int particionarUltimoPivo(int inicio, int fim){
+    int a = inicio;
+    int b = fim - 1;  
+
+    T pivo = (T) info[fim]; 
+    
+    while(true){
+        
+        do{
+            a = a + 1;
+        } while(a <= fim - 1 && ((Comparable<T>)info[a]).compareTo(pivo) < 0);
+
+        do{
+            b = b - 1;
+        } while(b >= inicio && ((Comparable<T>)info[b]).compareTo(pivo) > 0);
+
+        if(a >= b)
+            break;
+
+        trocar(a, b);
+    }
+
+   
+    trocar(a, fim); 
+
+    return a; 
+}
+
+public void trocar(int a, int b){
+    ListaEncadeada<NoMapa<T>> temp = info[a]; 
+    info[a] = info[b];
+    info[b] = temp;
+ 
+ }
+ 
 
 public void trocar(T [] info, int atual, int sucessor){
    T temp =  info[atual]; 

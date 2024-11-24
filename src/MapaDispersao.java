@@ -207,13 +207,15 @@ public void ordenarBolhaCrescente(T [] info){
     int i,j;
     int n = info.length;
     boolean trocar; 
+    int numTrocas = 0; // nhúmero de trocas 
 
-    for(i = n-1 ;i <= 1; i++){
+    for(i = n-1 ;i >= 1; i--){
         trocar = false;
        for(j = 0; j <= i; j++){
           if(((Comparable<T>)info[j]).compareTo(info[j+1]) > 0){
             trocar(info, j, j+1);
             trocar = true; 
+            numTrocas++; 
           }
        }
        if(!trocar) break; 
@@ -227,6 +229,8 @@ public void trocar(T [] info, int atual, int sucessor){
    info[sucessor] = temp;
 
 }
+
+
 
 @Override
 public String toString() {

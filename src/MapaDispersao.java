@@ -207,11 +207,13 @@ public void ordenarBolhaCrescente(T [] info){
     int i,j;
     int n = info.length;
     boolean trocar; 
-    int numTrocas = 0; // nhúmero de trocas 
+    int numTrocas = 0; 
+    int numComparacoes = 0; 
 
     for(i = n-1 ;i >= 1; i--){
         trocar = false;
        for(j = 0; j <= i; j++){
+          numComparacoes++;
           if(((Comparable<T>)info[j]).compareTo(info[j+1]) > 0){
             trocar(info, j, j+1);
             trocar = true; 
@@ -222,6 +224,35 @@ public void ordenarBolhaCrescente(T [] info){
 
     }
 }
+
+public void ordenarBolhaDecrescente(T [] info) {
+    int i, j;
+    int n = info.length;
+    boolean trocar;
+    int numTrocas = 0; 
+
+    for (i = n - 1; i >= 1; i--) { 
+        trocar = false;
+        for (j = 0; j < i; j++) { 
+            if (((Comparable<T>)info[j]).compareTo(info[j + 1]) < 0) { 
+                trocar(info, j, j + 1);
+                trocar = true;
+                numTrocas++;
+            }
+        }
+        if (!trocar) break; 
+    }
+}
+
+public int comparacoes(T [] info){
+   int N = info.length;
+   int numComparacoes = (N * (N - 1)) / 2;
+   if(numComparacoes > 0){
+     return(numComparacoes);
+   }
+   return 0; 
+}
+
 
 public void trocar(T [] info, int atual, int sucessor){
    T temp =  info[atual]; 
